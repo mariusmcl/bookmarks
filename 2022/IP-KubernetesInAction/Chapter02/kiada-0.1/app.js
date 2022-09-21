@@ -45,7 +45,7 @@ function isGraphicalWebBrowser(req) {
 
 function handler(req, res) {
     let clientIP = req.connection.remoteAddress;
-    console.log("Received request for " + req.url + " from " + clientIP);
+    // console.log("Received request for " + req.url + " from " + clientIP);
     console.log("request", req)
     switch (req.url) {
         case '/':
