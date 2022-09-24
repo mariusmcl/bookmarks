@@ -19,3 +19,8 @@ file-descriptors tilgjengeligjøres for å kunne kommunisere: programmet må kun
 IO-request til disk: programmet kan bli blokket av at det venter på OS-et. MEN: da skjer 'ingenting' på prosessoren, så det er DISKEN som det ventes på!! ganske utrolig
 
     IO-request til disk: det er den FYSISKE DISKEN som passer på allokeringen/ventes på!!! 
+
+
+HOMEWORK:
+
+-- Order of the processes matter! If we shecudle P1 to be b4 P2, but P2 has an I/O Request, then P2 should run before P1 so that P1 can run whilst P2 is executing an I/O Request!
