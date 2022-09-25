@@ -12,6 +12,7 @@ void *mythread(void *arg) {
     char *letter = arg;
     int i; // stack (private per thread) 
     printf("%s: begin [addr of i: %p]\n", letter, &i);
+    printf("thread [%p], loc of counter")
     for (i = 0; i < max; i++) {
 	counter = counter + 1; // shared: only one
     }

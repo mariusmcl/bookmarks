@@ -19,24 +19,29 @@ int main()
 
 	/* continued */
 	if ((pid = fork()) > 0) {
+		close(p[0]);
+		printf("writing, (pid:%d)\n", getpid());
 		write(p[1], msg1, MSGSIZE);
 		write(p[1], msg2, MSGSIZE);
 		write(p[1], msg3, MSGSIZE);
 
+		close(p[1]);
 		// Adding this line will
 		// not hang the program
 		// close(p[1]);
-		wait(NULL);
+		// wait(NULL);
 	}
 
 	else {
 		// Adding this line will
 		// not hang the program
-		// close(p[1]);
+		printf("reading, (pid:%d)\n", getpid());
+		close(p[1]);
 		while ((nbytes = read(p[0], inbuf, MSGSIZE)) > 0)
 			printf("% s\n", inbuf);
 		if (nbytes != 0)
 			exit(2);
+		close(p[0]);
 		printf("Finished reading\n");
 	}
 	return 0;
