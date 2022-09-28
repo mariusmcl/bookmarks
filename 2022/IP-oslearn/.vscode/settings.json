@@ -6,6 +6,7 @@
         "common.h": "c",
         "stat.h": "c",
         "common_threads.h": "c",
-        "__threading_support": "c"
+        "__threading_support": "c",
+        "time.h": "c"
     }
 }
