@@ -7,8 +7,8 @@
 int main(int argc, char *argv[])
 {
     int *ptr = (int *) malloc(sizeof(int));
-    printf("ptrderefval: %d\n", *ptr);
-    printf("ptr: %d\n", ptr);
+    // printf("ptrderefval: %d\n", *ptr);
+    // printf("ptr: %d\n", ptr);
     ptr = NULL;
     printf("ptr dereference val: %d\n", *ptr);
 }
