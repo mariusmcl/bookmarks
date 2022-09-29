@@ -2,28 +2,21 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include <stdlib.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    long long time;
-    time = -clock();
-    struct timeval current_time;
-    gettimeofday(&current_time, NULL);
-    // printf("current TimeofDay: (%ld)s (%d) usec\n",
-    //          current_time.tv_sec, current_time.tv_usec);
-    int max = 100;
-    int diffs = 0;
-    for(int i = 0; i < max; i++){
-        int prev = current_time.tv_usec;
-        gettimeofday(&current_time, NULL);
-        diffs += current_time.tv_usec - prev;
-        printf("diff (%d)\n", diffs);
-    }
-    printf("diffs: (%d)\n", diffs / max);
-    for (int i = 0; i < max; i++)
+    printf("pid: %d\n", getpid());
+    int qq = atoi(argv[1]);
+    int bigarr[qq * 1024 * 1000];
+    printf("sizeof bigarr (MB) %lu\n", sizeof(bigarr) / (1024 * 1000));
+    for (int i = 0; i < qq * 1024 * 1000; i++)
     {
-        read(0, NULL, 0);
-        time += clock();
+        if (i % 100000 == 0)
+        {
+            printf("on line (%d), value of array (%d)\n", i, bigarr[i]);
+            sleep(1);
+        }
     }
-    printf("Took time: (%lld) microseconds\n", time / max);
+
 }
