@@ -1,23 +1,6 @@
-import imp
+from turtle import forward
 import torch
-import torch.nn
-
-""" def create_position_embedding_mtrx(max_seq_len, hidden_size):
-    output = torch.zeros((max_seq_len, hidden_size))
-    
-    # x[0]: position in sequence, x[1]: iterator over hidden dim
-    sinus = lambda x: torch.sin(x[0] / (max_seq_len ** (2 * x[1] / hidden_size)))
-    cosinus = lambda x: torch.cos(x[0] / (max_seq_len ** (2 * x[1] / hidden_size)))
-    
-    timesteps = torch.linspace(0, max_seq_len, steps=max_seq_len)
-    hidden_dimension = torch.linspace(0, hidden_size, steps=hidden_size)
-    
-    sinusoidal = list(map(sinus,  list(zip(timesteps, hidden_dimension[::2]))))
-    cosine = list(map(cosinus,  list(zip(timesteps, hidden_dimension[1::2]))))
-    
-    output[::2, :] = 
-    return """
-    
+import torch.nn as nn
     
 def create_position_embedding_mtrx(max_seq_len, hidden_size):
     """
@@ -41,5 +24,14 @@ def create_position_embedding_mtrx(max_seq_len, hidden_size):
 
 
 class Attention(nn.Module):
-    def __init__(self, ):
+    def __init__(self, input_size, output_size, attention_size):
         super().__init__()
+        query_head = nn.Linear(input_size, attention_size)
+        key_head = nn.Linear(input_size, attention_size)
+        value_head = nn.Linear(input_size, output_size)
+    
+    def forward(self, input):
+        q = self.query_head(input)
+        k = self.key_head(input)
+
+        
