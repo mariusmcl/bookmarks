@@ -127,24 +127,27 @@ class Result {
         bool hit;
         double intersectionDistance;
         vec3 intersectionPoint;
+        std::string reason;
 };
 
 inline std::ostream& operator<<(std::ostream &out, const Result &res) {
     return out << "Hit:" << res.hit << "Distance: " << res.intersectionDistance << "Location" << res.intersectionPoint;
 }
 
+
 Result * intersect(Ray ray, Triangle triangle){
     vec3 N = cross(triangle.V1 - triangle.V0, triangle.V2 - triangle.V0);  // Normal vector of the triangle
 
     double denominator = dot(ray.direction, N);
-    std::cout << "ray.direction:" << ray.direction <<  "\n";
-    std::cout << "N :" << N  <<  "\n";
+    //std::cout << "ray.direction:" << ray.direction <<  "\n";
+    //std::cout << "N :" << N  <<  "\n";
 
     if (abs(denominator) < 1e-8){
         // Ray is parallel to the triangle's plane
-        std::cout << "Parallel to plane" << "\n";
+        //std::cout << "Parallel to plane" << "\n";
         Result * res_ptr = new Result();
         res_ptr->hit = false;
+        res_ptr->reason = "Parallel to plane";
         return res_ptr;
     }
 
@@ -152,9 +155,10 @@ Result * intersect(Ray ray, Triangle triangle){
 
     if(t < 0){
         // Triangle is behind ray
-        std::cout << "Triangle behind ray" << "\n";
+        //std::cout << "Triangle behind ray" << "\n";
         Result * res_ptr = new Result();
         res_ptr->hit = false;
+        res_ptr->reason = "Triangle behind ray";
         return res_ptr;
     }
 
@@ -174,9 +178,10 @@ Result * intersect(Ray ray, Triangle triangle){
     bool check = (scores[2] < 0) == (scores[0] < 0);
     for(int j = 0; j < 2;  j++){
         if(!check){
-            std::cout << "Unequal signs on index " << j << "\n";
+            //std::cout << "Unequal signs on index " << j << "\n";
             Result * res_ptr = new Result();
             res_ptr->hit = false;
+            res_ptr->reason = "Outside of triangle";
             return res_ptr;
         }
         check = (scores[j] < 0) == (scores[j+1] < 0);
